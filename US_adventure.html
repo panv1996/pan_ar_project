@@ -1,0 +1,209 @@
+<html>
+<head>
+<style>
+/*h1.yolo {
+  
+  position: absolute;
+  left: 0px;
+  top: 0px;
+  z-index: -1;
+  color: yellow;
+
+}
+
+h1.hidden{
+visibility: hidden;
+}*/
+body
+{
+    width:1920px;
+    height:1080px;
+}
+
+
+
+.model1{
+position: absolute;
+ top: -10vh;
+ left: 10px;
+ z-index: 3;
+
+}
+
+.model2{
+position: absolute;
+ top: 0px;
+ left: 10px;
+ z-index: 4;
+
+}
+
+model-viewer{
+
+ width: 40vw;
+ height: 40vw;
+ z-index: 3;
+ background: url(pic/model_bg.png);
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+ 
+}
+
+
+
+h1{
+  font-family:  Helvetica;
+  color: white;
+  position: absolute;
+  z-index: -1;
+  top: 50%;
+  left: 50%;
+  text-align: center;
+  padding: 10px;
+  width: 100%;
+  transform: translate(-50%, -50%);
+  background-color: black;
+
+
+}
+
+h1.hide{
+visibility: hidden;
+}
+
+img.show{
+  position: absolute;
+  z-index: 3;
+  
+}
+
+.hide{
+visibility: hidden;
+
+}
+
+.hide2{
+visibility: hidden;
+
+}
+
+img.windmill{
+width: 20%;
+left: 0px;
+  top: 0px;
+}
+
+img.text2{
+  width: 35%;
+  left: 0px;
+  top: 10%;
+  z-index: 4;
+}
+
+img.info1{
+  position: absolute;
+ bottom: 5px;
+ left: 5px;
+  z-index: 4;
+  width: 90%;
+
+}
+
+/*.back{
+  position: absolute;
+  left: 0px;
+  top: 0px;
+  z-index: -10;
+}*/
+
+a-scene {
+
+position: absolute;
+top: 0px;
+z-index: -1;
+  }
+
+</style>
+
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/gh/aframevr/aframe@1c2407b26c61958baa93967b5412487cd94b290b/dist/aframe-master.min.js"></script>
+<script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar-nft.js"></script>
+<script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
+<script nomodule src="https://unpkg.com/@google/model-viewer/dist/model-viewer-legacy.js"></script>
+
+
+
+<script>
+  AFRAME.registerComponent('markerhandler', {
+    init: function () {
+      this.el.sceneEl.addEventListener('markerFound', () => {
+        // redirect to custom URL e.g. google.com
+        console.log("mark found");
+
+       document.getElementById("popup").classList.remove("hide");
+       document.getElementById("popup2").classList.remove("hide");
+       document.getElementById("hidden").classList.add("hide2");
+       document.getElementById("hidden2").classList.add("hide2");
+      })
+
+
+      this.el.sceneEl.addEventListener('markerLost', () => {
+        // redirect to custom URL e.g. google.com
+        console.log("mark lost");
+
+       document.getElementById("popup").classList.add("hide");
+       document.getElementById("popup2").classList.add("hide");
+       document.getElementById("hidden").classList.remove("hide2");
+       document.getElementById("hidden2").classList.remove("hide2");
+      })
+    }
+  });
+</script>
+</head>
+
+<body style="margin : 0px; overflow: hidden;">
+
+  
+  <a-scene
+    vr-mode-ui="enabled: false;"
+    renderer="logarithmicDepthBuffer: true;"
+    embedded
+    arjs="trackingMethod: best; sourceType: webcam; debugUIEnabled: false; detectionMode: mono_and_matrix; matrixCodeType: 3x3;">
+
+    <!-- <a-marker markerhandler preset="hiro"> -->
+     <a-marker markerhandler preset="barcode" type='barcode' value='0'>
+        <a-box position='0 0.5 0' color="blue"></a-box>
+       <!--  <a-asset-item id="windmill" src="model/windmill2/windmill.gltf"></a-asset-item>
+            <a-gltf-model src="#windmill"  scale="0.8 0.8 0.8" rotation="0 0 0" animation="property: rotation; to: 0 0 360; loop: true; dur: 10000" ></a-gltf-model> -->
+
+
+    </a-marker>
+
+    <a-entity camera></a-entity>
+  </a-scene>
+
+
+
+<div class="model1 hide" id="popup">
+<model-viewer  src="model/bryce_canyon/bryce.gltf" alt="A 3D model of an astronaut" auto-rotate></model-viewer>
+</div>
+
+<div class="model2" id="hidden">
+<model-viewer src="model/page/page.gltf" alt="A 3D model of an astronaut" auto-rotate></model-viewer>
+</div>
+
+<img src="pic/canyon_text1.png" class="info1" id="hidden2">
+<img src="pic/canyon_text2.png" class="info1 hide" id="popup2">
+
+<!-- <img src="pic/windmill_title.png" class="show hide windmill" id="popup">
+<img src="pic/windmill_text2.png" class="show hide2 text2" id="popup2">
+
+<img src="pic/windmill_text.png" class="info">
+
+<h1 class="hide" id="hidden">Show Pan's icon to the screen to activate the memory</h1>
+ -->
+
+</body>
+
+</html>

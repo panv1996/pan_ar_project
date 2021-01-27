@@ -1,0 +1,14 @@
+<head>
+  <title>My A-Frame Scene</title>
+  <script src="https://aframe.io/releases/1.1.0/aframe.min.js"></script>
+  <script src="https://unpkg.com/aframe-spritesheet-component/dist/aframe-spritesheet-component.min.js"></script>
+</head>
+
+<body>
+  <a-scene>
+    <!-- rows/cols format-->
+    <a-image src="pic/spritesheet.png" sprite-sheet="cols:8; rows: 3; progress: 0;"></a-image>
+    <!-- json format -->
+    <a-image src="pic/spritesheet.png" sprite-sheet="dataUrl: spritesheet.json; progress: 0;" ></a-image>
+  </a-scene>
+</body>

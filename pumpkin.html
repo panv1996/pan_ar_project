@@ -1,0 +1,155 @@
+<html>
+<head>
+<style>
+/*h1.yolo {
+  
+  position: absolute;
+  left: 0px;
+  top: 0px;
+  z-index: -1;
+  color: yellow;
+
+}
+
+h1.hidden{
+visibility: hidden;
+}*/
+
+h1{
+  font-family:  Helvetica;
+  color: white;
+  position: absolute;
+  z-index: -1;
+  top: 50%;
+  right: 50px;
+  text-align: right;
+  padding: 10px;
+  padding-right: 60px;
+  padding-left: 60px;
+  font-size: 20px;
+  background-color: black;
+
+
+}
+
+h1.hide{
+visibility: hidden;
+}
+
+img.show{
+  position: absolute;
+  z-index: 3;
+  
+}
+
+img.hide{
+visibility: hidden;
+
+}
+
+img.hide2{
+visibility: hidden;
+
+}
+
+img.windmill{
+width: 20%;
+left: 0px;
+  top: 0px;
+}
+
+img.text2{
+  width: 35%;
+  left: 0px;
+  top: 10%;
+  z-index: 4;
+}
+
+img.info{
+  position: absolute;
+ top: 5px;
+ left: 5px;
+  z-index: 3;
+  height: 100vh;
+
+}
+
+/*.back{
+  position: absolute;
+  left: 0px;
+  top: 0px;
+  z-index: -10;
+}*/
+
+a-scene {
+
+position: absolute;
+z-index: 1;
+  }
+
+</style>
+
+
+
+<script src="https://cdn.jsdelivr.net/gh/aframevr/aframe@1c2407b26c61958baa93967b5412487cd94b290b/dist/aframe-master.min.js"></script>
+<script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar-nft.js"></script>
+
+<script>
+  AFRAME.registerComponent('markerhandler', {
+    init: function () {
+      this.el.sceneEl.addEventListener('markerFound', () => {
+        // redirect to custom URL e.g. google.com
+        console.log("mark found");
+
+       // document.getElementById("popup").classList.remove("hide");
+       // document.getElementById("popup2").classList.remove("hide2");
+       document.getElementById("hidden").classList.add("hide");
+      })
+
+
+      this.el.sceneEl.addEventListener('markerLost', () => {
+        // redirect to custom URL e.g. google.com
+        console.log("mark lost");
+
+       // document.getElementById("popup").classList.add("hide");
+       // document.getElementById("popup2").classList.add("hide2");
+       document.getElementById("hidden").classList.remove("hide");
+      })
+    }
+  });
+</script>
+</head>
+
+<body style="margin : 0px; overflow: hidden;">
+
+  
+  <a-scene
+    vr-mode-ui="enabled: false;"
+    renderer="logarithmicDepthBuffer: true;"
+    embedded
+    arjs="trackingMethod: best; sourceType: webcam; debugUIEnabled: false; detectionMode: mono_and_matrix; matrixCodeType: 3x3;">
+
+    <!-- <a-marker markerhandler preset="hiro"> -->
+    <a-marker markerhandler preset="barcode" type='barcode' value='0'>
+        <!-- <a-box position='0 0.5 0' color="blue"></a-box> -->
+        <a-asset-item id="windmill" src="model/pumpkin/pumpkin.gltf"></a-asset-item>
+            <a-gltf-model src="#windmill"  scale="2 2 2" rotation="0 0 0" animation="property: rotation; to: 0 0 360; loop: true; dur: 10000" ></a-gltf-model>
+
+
+    </a-marker>
+
+    <a-entity camera></a-entity>
+  </a-scene>
+
+<!-- 
+<img src="pic/windmill_title.png" class="show hide windmill" id="popup">
+<img src="pic/windmill_text2.png" class="show hide2 text2" id="popup2"> -->
+
+<img src="pic/pumpkin_text1.png" class="info">
+
+<h1 class="hide" id="hidden">Show Pan's icon to the screen to activate the memory</h1>
+
+
+</body>
+
+</html>

@@ -1,0 +1,181 @@
+<html>
+<head>
+<style>
+/*h1.yolo {
+  
+  position: absolute;
+  left: 0px;
+  top: 0px;
+  z-index: -1;
+  color: yellow;
+
+}
+
+h1.hidden{
+visibility: hidden;
+}*/
+
+h1{
+  font-family:  Helvetica;
+  color: white;
+  position: absolute;
+  z-index: -1;
+}
+
+h1.banner1{
+  top: 50%;
+  left: 40%;
+  text-align: center;
+  padding: 10px;
+  width: 120%;
+  transform: translate(-50%, -50%);
+  background-color: black;
+}
+
+h1.banner2{
+  top: 50%;
+  left: 50%;
+  text-align: center;
+  padding: 10px;
+  width: 100%;
+  transform: translate(-50%, -50%);
+  background-color: red;
+   z-index: 4;
+}
+
+h1.hide{
+visibility: hidden;
+}
+
+img.show{
+  position: absolute;
+  z-index: 3;
+  
+}
+
+img.hide{
+visibility: hidden;
+
+}
+
+img.hide2{
+visibility: hidden;
+
+}
+
+img.windmill{
+width: 20%;
+left: 0px;
+  top: 0px;
+}
+
+img.text1{
+  position: absolute;
+  width: 100%;
+  left: 0px;
+  bottom: 10px;
+  z-index: 4;
+}
+
+img.entry{
+  position: absolute;
+ top: 0px;
+ right: 0px;
+  z-index: 3;
+  height: 100%;
+}
+
+img.sign{
+  position: absolute;
+ top: 0px;
+ left: 10px;
+  z-index: 3;
+  width: 25%;
+}
+
+/*.back{
+  position: absolute;
+  left: 0px;
+  top: 0px;
+  z-index: -10;
+}*/
+
+a-scene {
+
+position: absolute;
+z-index: 1;
+  }
+
+</style>
+
+
+
+<script src="https://cdn.jsdelivr.net/gh/aframevr/aframe@1c2407b26c61958baa93967b5412487cd94b290b/dist/aframe-master.min.js"></script>
+<script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar-nft.js"></script>
+
+<script>
+  AFRAME.registerComponent('markerhandler', {
+    init: function () {
+      this.el.sceneEl.addEventListener('markerFound', () => {
+        // redirect to custom URL e.g. google.com
+        console.log("mark found");
+
+       document.getElementById("popup").classList.remove("hide");
+       document.getElementById("popup2").classList.remove("hide");
+       document.getElementById("popup3").classList.remove("hide");
+       document.getElementById("hidden").classList.add("hide");
+       document.getElementById("hidden2").classList.add("hide");
+      })
+
+
+      this.el.sceneEl.addEventListener('markerLost', () => {
+        // redirect to custom URL e.g. google.com
+        console.log("mark lost");
+
+       document.getElementById("popup").classList.add("hide");
+       document.getElementById("popup2").classList.add("hide");
+       document.getElementById("popup3").classList.add("hide");
+       document.getElementById("hidden").classList.remove("hide");
+       document.getElementById("hidden2").classList.remove("hide");
+      })
+    }
+  });
+</script>
+</head>
+
+<body style="margin : 0px; overflow: hidden;">
+
+  
+  <a-scene
+    vr-mode-ui="enabled: false;"
+    renderer="logarithmicDepthBuffer: true;"
+    embedded
+    arjs="trackingMethod: best; sourceType: webcam; debugUIEnabled: false; detectionMode: mono_and_matrix; matrixCodeType: 3x3;">
+
+     <a-marker markerhandler preset="barcode" type='barcode' value='0'>
+    <!-- <a-marker markerhandler preset="pattern" type='pattern' url='pic/mark2.patt'> -->
+        <!-- <a-box position='0 0.5 0' color="blue"></a-box> -->
+        <a-asset-item id="windmill" src="model/metro/card.gltf"></a-asset-item>
+            <a-gltf-model src="#windmill"  scale="1 1 1" rotation="0 0 0" animation="property: rotation; to: 0 0 360; loop: true; dur: 10000" ></a-gltf-model>
+
+
+    </a-marker>
+
+    <a-entity camera></a-entity>
+  </a-scene>
+
+
+<img src="pic/entry2.png" class="entry hide" id="popup">
+
+<img src="pic/subway_text.png" class="text1 hide" id="popup3">
+
+<img src="pic/entry1.png" class="entry" id="hidden2">
+
+<img src="pic/subway_sign.png" class="sign">
+
+<h1 class="banner1 hide" id="hidden">Scan the card to enter</h1>
+<h1 class="banner2 hide" id="popup2">You don't have enough money in your card!</h1>
+
+</body>
+
+</html>
