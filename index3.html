@@ -128,14 +128,21 @@ z-index: 1;
     embedded
     arjs="trackingMethod: best; sourceType: webcam; debugUIEnabled: false; detectionMode: mono_and_matrix; matrixCodeType: 3x3;">
 
-     <a-marker markerhandler preset="barcode" type='barcode' value='0'>
+     <a-nft
+      type="nft"
+      url="pic/Obama.jpg"
+      smooth="true"
+      smoothCount="10"
+      smoothTolerance=".01"
+      smoothThreshold="5"
+    >
     <!-- <a-marker markerhandler preset="pattern" type='pattern' url='pic/mark2.patt'> -->
         <!-- <a-box position='0 0.5 0' color="blue"></a-box> -->
         <a-asset-item id="windmill" src="model/windmill2/windmill.gltf"></a-asset-item>
             <a-gltf-model src="#windmill"  scale="0.8 0.8 0.8" rotation="0 0 0" animation="property: rotation; to: 0 0 360; loop: true; dur: 10000" ></a-gltf-model>
 
 
-    </a-marker>
+    </a-nft>
 
     <a-entity camera></a-entity>
   </a-scene>
